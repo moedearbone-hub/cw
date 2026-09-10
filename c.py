@@ -14,17 +14,11 @@ This program manages:
 import json
 import os
 
-
-# ---------------------------------------------------------
 # FILE USED TO SAVE DATA
-# ---------------------------------------------------------
 
 DATA_FILE = "hostel_data.json"
 
-
-# ---------------------------------------------------------
 # HOSTEL DATA SETUP
-# ---------------------------------------------------------
 
 # Each hostel block has rooms.
 # Each room has a capacity and current occupancy.
@@ -52,13 +46,11 @@ hostels = {
     }
 }
 
-
 # Dictionary used to store student information
 
 students = {}
 
 # DISPLAY OCCUPANCY OVERVIEW
-
 
 def display_occupancy_overview():
     """Display a short occupancy overview when program starts."""
@@ -81,9 +73,7 @@ def display_occupancy_overview():
             f"{total_occupied}/{total_capacity} occupied"
         )
 
-
 # SAVE DATA
-
 
 def save_data():
     """Save hostel and student information to a JSON file."""
@@ -102,10 +92,7 @@ def save_data():
     except OSError as error:
         print("\nError saving data:", error)
 
-
-
 # LOAD DATA
-
 
 def load_data():
     """Load saved data when the program starts."""
@@ -131,9 +118,7 @@ def load_data():
         print("\nThe saved data file is damaged or invalid.")
         print("Starting with new data instead.")
 
-
 # GET VALID NUMBER
-
 
 def get_positive_number(message):
     """Ask the user for a positive number."""
@@ -150,10 +135,7 @@ def get_positive_number(message):
         except ValueError:
             print("Invalid input. Please enter a number.")
 
-
-
 # REGISTER STUDENT
-
 
 def register_student():
     """Register a student and allocate a room."""
@@ -260,10 +242,7 @@ def register_student():
     print("Room:", room_number)
     print("Outstanding Balance:", total_fee)
 
-
-
 # RECORD FEE PAYMENT
-
 
 def record_payment():
     """Record a full or partial payment."""
@@ -384,9 +363,7 @@ def search_student():
     if not found:
         print("\nNo student found.")
 
-
 # OCCUPANCY REPORT
-
 
 def occupancy_report():
     """Display a full occupancy report for each block."""
@@ -517,8 +494,6 @@ def view_all_students():
             f"{balance:<10.2f}"
         )
 
-
-
 # VIEW PAYMENT HISTORY
 
 
@@ -570,9 +545,7 @@ def payment_history():
     print("Outstanding Balance:", balance)
 
 
-
 # MAIN MENU
-
 
 def display_menu():
     """Display the main program menu."""
@@ -593,8 +566,6 @@ def display_menu():
     print("9. Exit")
 
     print("==========================================")
-
-
 
 # MAIN PROGRAM
 
@@ -656,10 +627,7 @@ def main():
                 " Please select a number from 1 to 9."
             )
 
-
-
 # START THE PROGRAM
-
 
 if __name__ == "__main__":
     main() 
