@@ -11,17 +11,17 @@ This program manages:
 7. Saving and loading data from a file
 """
 
+
 import json
 import os
+
 
 # FILE USED TO SAVE DATA
 
 DATA_FILE = "hostel_data.json"
 
-# HOSTEL DATA SETUP
 
-# Each hostel block has rooms.
-# Each room has a capacity and current occupancy.
+# HOSTEL DATA SETUP
 
 hostels = {
     "Block A": {
@@ -46,14 +46,16 @@ hostels = {
     }
 }
 
+
 # Dictionary used to store student information
 
 students = {}
 
+
 # DISPLAY OCCUPANCY OVERVIEW
 
 def display_occupancy_overview():
-    """Display a short occupancy overview when program starts."""
+    """Display a short occupancy overview when the program starts."""
 
     print("\n==========================================")
     print("       HOSTEL OCCUPANCY OVERVIEW")
@@ -72,6 +74,7 @@ def display_occupancy_overview():
             f"{block_name}: "
             f"{total_occupied}/{total_capacity} occupied"
         )
+
 
 # SAVE DATA
 
@@ -92,6 +95,7 @@ def save_data():
     except OSError as error:
         print("\nError saving data:", error)
 
+
 # LOAD DATA
 
 def load_data():
@@ -107,11 +111,13 @@ def load_data():
             data = json.load(file)
 
         loaded_hostels = data.get("hostels")
+
         if loaded_hostels is not None:
             hostels.clear()
             hostels.update(loaded_hostels)
 
         loaded_students = data.get("students")
+
         if loaded_students is not None:
             students.clear()
             students.update(loaded_students)
@@ -121,6 +127,7 @@ def load_data():
     except (json.JSONDecodeError, OSError):
         print("\nThe saved data file is damaged or invalid.")
         print("Starting with new data instead.")
+
 
 # GET VALID NUMBER
 
@@ -138,6 +145,7 @@ def get_positive_number(message):
 
         except ValueError:
             print("Invalid input. Please enter a number.")
+
 
 # REGISTER STUDENT
 
@@ -166,8 +174,6 @@ def register_student():
         print("Student name cannot be empty.")
         return
 
-    # Display hostel blocks
-
     print("\nAvailable Hostel Blocks:")
 
     for block in hostels:
@@ -180,8 +186,6 @@ def register_student():
     if block_name not in hostels:
         print("Invalid hostel block.")
         return
-
-    # Display rooms in selected block
 
     print(f"\nRooms in {block_name}:")
 
@@ -207,22 +211,14 @@ def register_student():
 
     room = hostels[block_name][room_number]
 
-    # Check whether room is full
-
     if room["occupancy"] >= room["capacity"]:
         print("\nROOM ALLOCATION REJECTED")
-        print(
-            f"Room {room_number} is already full."
-        )
+        print(f"Room {room_number} is already full.")
         return
 
-    # Get total hostel fee
-
     total_fee = get_positive_number(
-        "Enter total hostel fee: "
+        "Enter total hostel fee in UGX: "
     )
-
-    # Create student record
 
     students[registration_number] = {
         "name": name,
@@ -233,8 +229,6 @@ def register_student():
         "payments": []
     }
 
-    # Increase room occupancy
-
     room["occupancy"] += 1
 
     save_data()
@@ -244,7 +238,8 @@ def register_student():
     print("Registration Number:", registration_number)
     print("Hostel Block:", block_name)
     print("Room:", room_number)
-    print("Outstanding Balance:", total_fee)
+    print(f"Outstanding Balance: UGX {total_fee:,.2f}")
+
 
 # RECORD FEE PAYMENT
 
@@ -270,9 +265,9 @@ def record_payment():
     )
 
     print("\nStudent:", student["name"])
-    print("Total Fee:", student["total_fee"])
-    print("Amount Paid:", student["amount_paid"])
-    print("Outstanding Balance:", outstanding)
+    print(f"Total Fee: UGX {student['total_fee']:,.2f}")
+    print(f"Amount Paid: UGX {student['amount_paid']:,.2f}")
+    print(f"Outstanding Balance: UGX {outstanding:,.2f}")
 
     if outstanding <= 0:
         print("\nThis student's fees are already fully paid.")
@@ -282,7 +277,7 @@ def record_payment():
 
         try:
             amount = float(
-                input("Enter payment amount: ")
+                input("Enter payment amount in UGX: ")
             )
 
             if amount <= 0:
@@ -300,15 +295,8 @@ def record_payment():
         except ValueError:
             print("Invalid amount. Enter a number.")
 
-    # Update amount paid
-
     student["amount_paid"] += amount
-
-    # Save individual payment
-
     student["payments"].append(amount)
-
-    # Calculate new balance
 
     new_balance = (
         student["total_fee"] - student["amount_paid"]
@@ -317,8 +305,9 @@ def record_payment():
     save_data()
 
     print("\nPayment recorded successfully.")
-    print("Payment Made:", amount)
-    print("New Outstanding Balance:", new_balance)
+    print(f"Payment Made: UGX {amount:,.2f}")
+    print(f"New Outstanding Balance: UGX {new_balance:,.2f}")
+
 
 # SEARCH STUDENT
 
@@ -351,21 +340,19 @@ def search_student():
 
             print("\n------------------------------------------")
             print("Student Name:", student["name"])
-            print(
-                "Registration Number:",
-                registration_number
-            )
+            print("Registration Number:", registration_number)
             print("Hostel Block:", student["block"])
             print("Room:", student["room"])
-            print("Total Fee:", student["total_fee"])
-            print("Amount Paid:", student["amount_paid"])
-            print("Outstanding:", balance)
+            print(f"Total Fee: UGX {student['total_fee']:,.2f}")
+            print(f"Amount Paid: UGX {student['amount_paid']:,.2f}")
+            print(f"Outstanding: UGX {balance:,.2f}")
             print("------------------------------------------")
 
             found = True
 
     if not found:
         print("\nNo student found.")
+
 
 # OCCUPANCY REPORT
 
@@ -399,24 +386,12 @@ def occupancy_report():
 
         available = total_capacity - total_occupancy
 
-        print(
-            f"Total Occupied: "
-            f"{total_occupancy}"
-        )
-
-        print(
-            f"Total Capacity: "
-            f"{total_capacity}"
-        )
-
-        print(
-            f"Available Spaces: "
-            f"{available}"
-        )
+        print(f"Total Occupied: {total_occupancy}")
+        print(f"Total Capacity: {total_capacity}")
+        print(f"Available Spaces: {available}")
 
 
 # FEE DEFAULTERS
-
 
 def fee_defaulters():
     """Display students whose balance is above a threshold."""
@@ -426,7 +401,7 @@ def fee_defaulters():
     print("==========================================")
 
     threshold = get_positive_number(
-        "Enter outstanding balance threshold: "
+        "Enter outstanding balance threshold in UGX: "
     )
 
     found = False
@@ -442,13 +417,10 @@ def fee_defaulters():
 
             print("\n------------------------------------------")
             print("Name:", student["name"])
-            print(
-                "Registration Number:",
-                registration_number
-            )
+            print("Registration Number:", registration_number)
             print("Block:", student["block"])
             print("Room:", student["room"])
-            print("Outstanding Balance:", balance)
+            print(f"Outstanding Balance: UGX {balance:,.2f}")
             print("------------------------------------------")
 
             found = True
@@ -459,8 +431,8 @@ def fee_defaulters():
             "the specified threshold."
         )
 
-# VIEW ALL STUDENTS
 
+# VIEW ALL STUDENTS
 
 def view_all_students():
     """Display all registered students."""
@@ -478,10 +450,10 @@ def view_all_students():
         f"{'Name':<20}"
         f"{'Block':<12}"
         f"{'Room':<10}"
-        f"{'Balance':<10}"
+        f"{'Balance (UGX)':<15}"
     )
 
-    print("-" * 67)
+    print("-" * 72)
 
     for registration_number, student in students.items():
 
@@ -495,11 +467,11 @@ def view_all_students():
             f"{student['name']:<20}"
             f"{student['block']:<12}"
             f"{student['room']:<10}"
-            f"{balance:<10.2f}"
+            f"{balance:,.2f}"
         )
 
-# VIEW PAYMENT HISTORY
 
+# VIEW PAYMENT HISTORY
 
 def payment_history():
     """Display payment history for a student."""
@@ -534,19 +506,16 @@ def payment_history():
         start=1
     ):
 
-        print(
-            f"{number}. {payment:.2f}"
-        )
-
+        print(f"{number}. UGX {payment:,.2f}")
         total += payment
 
-    print("\nTotal Paid:", total)
+    print(f"\nTotal Paid: UGX {total:,.2f}")
 
     balance = (
         student["total_fee"] - total
     )
 
-    print("Outstanding Balance:", balance)
+    print(f"Outstanding Balance: UGX {balance:,.2f}")
 
 
 # MAIN MENU
@@ -571,21 +540,15 @@ def display_menu():
 
     print("==========================================")
 
-# MAIN PROGRAM
 
+# MAIN PROGRAM
 
 def main():
     """Main function that controls the program."""
 
-    # Load previous data
-
     load_data()
 
-    # Show occupancy when program starts
-
     display_occupancy_overview()
-
-    # Keep showing menu until user exits
 
     while True:
 
@@ -631,8 +594,9 @@ def main():
                 " Please select a number from 1 to 9."
             )
 
+
 # START THE PROGRAM
 
 if __name__ == "__main__":
     main()
-     
+    
