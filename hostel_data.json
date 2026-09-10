@@ -1,0 +1,59 @@
+{
+    "hostels": {
+        "Block A": {
+            "A101": {
+                "capacity": 4,
+                "occupancy": 0
+            },
+            "A102": {
+                "capacity": 4,
+                "occupancy": 0
+            },
+            "A103": {
+                "capacity": 4,
+                "occupancy": 0
+            },
+            "A104": {
+                "capacity": 4,
+                "occupancy": 0
+            }
+        },
+        "Block B": {
+            "B101": {
+                "capacity": 3,
+                "occupancy": 0
+            },
+            "B102": {
+                "capacity": 3,
+                "occupancy": 0
+            },
+            "B103": {
+                "capacity": 3,
+                "occupancy": 0
+            },
+            "B104": {
+                "capacity": 3,
+                "occupancy": 0
+            }
+        },
+        "Block C": {
+            "C101": {
+                "capacity": 2,
+                "occupancy": 0
+            },
+            "C102": {
+                "capacity": 2,
+                "occupancy": 0
+            },
+            "C103": {
+                "capacity": 2,
+                "occupancy": 0
+            },
+            "C104": {
+                "capacity": 2,
+                "occupancy": 0
+            }
+        }
+    },
+    "students": {}
+}

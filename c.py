@@ -57,10 +57,8 @@ hostels = {
 
 students = {}
 
-
-# ---------------------------------------------------------
 # DISPLAY OCCUPANCY OVERVIEW
-# ---------------------------------------------------------
+
 
 def display_occupancy_overview():
     """Display a short occupancy overview when program starts."""
@@ -84,9 +82,8 @@ def display_occupancy_overview():
         )
 
 
-# ---------------------------------------------------------
 # SAVE DATA
-# ---------------------------------------------------------
+
 
 def save_data():
     """Save hostel and student information to a JSON file."""
@@ -97,18 +94,18 @@ def save_data():
     }
 
     try:
-        with open(DATA_FILE, "w") as file:
+        with open(DATA_FILE, "w", encoding="utf-8") as file:
             json.dump(data, file, indent=4)
 
         print("\nData saved successfully.")
 
-    except Exception as error:
+    except OSError as error:
         print("\nError saving data:", error)
 
 
-# ---------------------------------------------------------
+
 # LOAD DATA
-# ---------------------------------------------------------
+
 
 def load_data():
     """Load saved data when the program starts."""
@@ -122,7 +119,7 @@ def load_data():
         return
 
     try:
-        with open(DATA_FILE, "r") as file:
+        with open(DATA_FILE, "r", encoding="utf-8") as file:
             data = json.load(file)
 
         hostels = data.get("hostels", hostels)
@@ -135,9 +132,8 @@ def load_data():
         print("Starting with new data instead.")
 
 
-# ---------------------------------------------------------
 # GET VALID NUMBER
-# ---------------------------------------------------------
+
 
 def get_positive_number(message):
     """Ask the user for a positive number."""
@@ -155,9 +151,9 @@ def get_positive_number(message):
             print("Invalid input. Please enter a number.")
 
 
-# ---------------------------------------------------------
+
 # REGISTER STUDENT
-# ---------------------------------------------------------
+
 
 def register_student():
     """Register a student and allocate a room."""
@@ -265,9 +261,9 @@ def register_student():
     print("Outstanding Balance:", total_fee)
 
 
-# ---------------------------------------------------------
+
 # RECORD FEE PAYMENT
-# ---------------------------------------------------------
+
 
 def record_payment():
     """Record a full or partial payment."""
@@ -341,10 +337,7 @@ def record_payment():
     print("Payment Made:", amount)
     print("New Outstanding Balance:", new_balance)
 
-
-# ---------------------------------------------------------
 # SEARCH STUDENT
-# ---------------------------------------------------------
 
 def search_student():
     """Search for a student by name or registration number."""
@@ -392,9 +385,8 @@ def search_student():
         print("\nNo student found.")
 
 
-# ---------------------------------------------------------
 # OCCUPANCY REPORT
-# ---------------------------------------------------------
+
 
 def occupancy_report():
     """Display a full occupancy report for each block."""
@@ -442,9 +434,8 @@ def occupancy_report():
         )
 
 
-# ---------------------------------------------------------
 # FEE DEFAULTERS
-# ---------------------------------------------------------
+
 
 def fee_defaulters():
     """Display students whose balance is above a threshold."""
@@ -487,10 +478,8 @@ def fee_defaulters():
             "the specified threshold."
         )
 
-
-# ---------------------------------------------------------
 # VIEW ALL STUDENTS
-# ---------------------------------------------------------
+
 
 def view_all_students():
     """Display all registered students."""
@@ -529,9 +518,9 @@ def view_all_students():
         )
 
 
-# ---------------------------------------------------------
+
 # VIEW PAYMENT HISTORY
-# ---------------------------------------------------------
+
 
 def payment_history():
     """Display payment history for a student."""
@@ -581,9 +570,9 @@ def payment_history():
     print("Outstanding Balance:", balance)
 
 
-# ---------------------------------------------------------
+
 # MAIN MENU
-# ---------------------------------------------------------
+
 
 def display_menu():
     """Display the main program menu."""
@@ -606,9 +595,9 @@ def display_menu():
     print("==========================================")
 
 
-# ---------------------------------------------------------
+
 # MAIN PROGRAM
-# ---------------------------------------------------------
+
 
 def main():
     """Main function that controls the program."""
@@ -668,10 +657,9 @@ def main():
             )
 
 
-# ---------------------------------------------------------
+
 # START THE PROGRAM
-# ---------------------------------------------------------
+
 
 if __name__ == "__main__":
-    main()
-    
+    main() 
