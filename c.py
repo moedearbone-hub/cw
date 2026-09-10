@@ -97,9 +97,6 @@ def save_data():
 def load_data():
     """Load saved data when the program starts."""
 
-    global hostels
-    global students
-
     if not os.path.exists(DATA_FILE):
         print("\nNo previous data found.")
         print("Starting with new hostel data.")
@@ -109,8 +106,15 @@ def load_data():
         with open(DATA_FILE, "r", encoding="utf-8") as file:
             data = json.load(file)
 
-        hostels = data.get("hostels", hostels)
-        students = data.get("students", {})
+        loaded_hostels = data.get("hostels")
+        if loaded_hostels is not None:
+            hostels.clear()
+            hostels.update(loaded_hostels)
+
+        loaded_students = data.get("students")
+        if loaded_students is not None:
+            students.clear()
+            students.update(loaded_students)
 
         print("\nPrevious data loaded successfully.")
 
